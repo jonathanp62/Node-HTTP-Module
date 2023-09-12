@@ -1,0 +1,12 @@
+{
+  "name": "http-module",
+  "version": "1.0.0",
+  "description": "Work with the HTTP module",
+  "main": "src/index.mjs",
+  "bin": {
+    "run": "./src/index.mjs"
+  },
+  "author": "Jonathan Parker",
+  "license": "ISC",
+  "type": "module"
+}
