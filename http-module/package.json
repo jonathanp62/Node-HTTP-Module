@@ -8,5 +8,8 @@
   },
   "author": "Jonathan Parker",
   "license": "ISC",
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "timers": "^0.1.1"
+  }
 }

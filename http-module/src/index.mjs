@@ -8,5 +8,6 @@
  */
 
 import { Application } from './application.mjs';
+import { config } from "../config.mjs";
 
-new Application().run();
+new Application(config).run();

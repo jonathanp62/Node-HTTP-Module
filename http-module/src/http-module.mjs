@@ -9,6 +9,7 @@
 
 import http from 'http';
 
+import { config } from "../config.mjs";
 import { createServer } from 'http';
 import { setTimeout } from "timers/promises";
 
@@ -18,19 +19,28 @@ import { setTimeout } from "timers/promises";
  * The express module is more likely
  * to be used than this module.
  */
-export class HttpModule {
+class HttpModule {
+    /**
+     * The constructor.
+     *
+     * @param   {config}    config
+     */
+    constructor(config) {
+        this._config = config;
+    }
+
     /**
      * Create the server and start the listener.
      */
     startServer() {
         const server = createServer((request, response) => {
             if (request.url === '/') {
-                response.write('<h1>Hello, Node.js!</h1>');
+                response.write(`${this._config.htmlContent}`);
                 response.end();
             }
         });
 
-        server.listen(8080);
+        server.listen(this._config.port);
 
         const sockets= new Set();
 
@@ -42,7 +52,7 @@ export class HttpModule {
             });
         });
 
-        console.log(`The HTTP Server is listening on port 8080`);
+        console.log(`The HTTP Server is listening on port ${this._config.port}`);
 
         this.waitAndClose(server, sockets);
     }
@@ -55,11 +65,11 @@ export class HttpModule {
      * @returns {Promise<void>}
      */
     waitAndClose = async (server, sockets) => {
-        await setTimeout(5000);
+        await setTimeout(this._config.timeoutInSeconds * 1000);
 
         server.closeIdleConnections();
 
-        console.log("Waiting 5 seconds...");
+        console.log(`Waiting ${this._config.timeoutInSeconds} seconds...`);
 
         server.close(() => {
             for (const socket of sockets) {
@@ -68,6 +78,8 @@ export class HttpModule {
             }
         });
 
-        console.log(`The HTTP Server is no longer listening`);
+        console.log('The HTTP Server is no longer listening');
     };
 }
+
+export { HttpModule };

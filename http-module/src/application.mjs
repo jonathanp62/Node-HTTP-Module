@@ -7,18 +7,28 @@
  * All Rights Reserved.
  */
 
+import { config } from "../config.mjs";
 import { HttpModule } from "./http-module.mjs";
 
 /**
  * The application class.
  */
-export class Application {
+class Application {
+    /**
+     * The constructor.
+     *
+     * @param   {config}  config
+     */
+    constructor(config) {
+        this._config = config;
+    }
+
     /**
      * The run method.
      */
     run() {
-        const httpModule = new HttpModule();
-
-        httpModule.startServer();
+        new HttpModule(this._config).startServer();
     }
 }
+
+export { Application };
