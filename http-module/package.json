@@ -2,6 +2,16 @@
   "name": "http-module",
   "version": "1.0.0",
   "description": "Work with the HTTP module",
+  "keywords": [
+    "node",
+    "learning",
+    "http",
+    "application",
+    "config"
+  ],
+  "repository": {
+    "type": "git"
+  },
   "main": "src/index.mjs",
   "bin": {
     "run": "./src/index.mjs"
